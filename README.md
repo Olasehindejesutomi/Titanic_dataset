@@ -52,6 +52,7 @@ Tools and Libraries
 - Scikit-learn
 - Seaborn (used to load an additional built-in Titanic dataset for
   reference)
+
 Project Workflow
 1. Import libraries -- Load the Python libraries used for data
    handling, visualization, model training, and evaluation.
@@ -79,6 +80,7 @@ Project Workflow
     Decision Tree and Random Forest models.
 12. Make a sample prediction -- Use the tuned Random Forest model to
     predict survival for a passenger example.
+
 Machine Learning Models
 The notebook trains and evaluates the following classifiers:
 - Logistic Regression
@@ -86,19 +88,21 @@ The notebook trains and evaluates the following classifiers:
 - Random Forest Classifier
 
 Model Results
-  Model                   Test accuracy
-  Logistic Regression            76.97%
-Decision Tree                  80.34%
-Random Forest                  80.90%
+  
+  Model                               Test accuracy
+  Logistic Regression                     76.97%
+Decision Tree                             80.34%
+Random Forest                             80.90%
 Hyperparameter tuning
 GridSearchCV uses five-fold cross-validation and accuracy as the scoring
 metric.
-  Model           Best parameters                     Best  Test accuracy after
-cross-validation               tuning
+  Model                     Best parameters                     Best  Test accuracy after
+cross-validation                  tuning
 accuracy 
-  Decision Tree   max_depth=4                     81.81%               80.34%
+Decision Tree   max_depth=4                     81.81%               80.34%
 Random Forest   max_depth=7,                    83.92%               80.34%
 n_estimators=50
+
 The tuned Random Forest achieved the highest cross-validation accuracy
 among the tuned models in this notebook. Its test accuracy was 80.34%.
 
