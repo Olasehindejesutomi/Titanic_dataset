@@ -43,9 +43,6 @@ Dataset observations
 The notebook uses six features for modelling: Pclass, Sex, Age,
 SibSp, PaCh, and Fare. The Name column is not included in the
 model features.
-Dataset note: The notebook uses the column name PaCh. Keep this
-exact name in your CSV, or update the notebook if your version of the
-dataset uses a different name such as Parch.
 
 Tools and Libraries
 - Python
@@ -87,11 +84,8 @@ The notebook trains and evaluates the following classifiers:
 - Logistic Regression
 - Decision Tree Classifier
 - Random Forest Classifier
-It also imports SVC (Support Vector Classifier), but the notebook does
-not train or evaluate an SVC model in the executed workflow.
+
 Model Results
-The following results are recorded in the notebook's executed outputs.
-Initial model comparison
   Model                   Test accuracy
   Logistic Regression            76.97%
 Decision Tree                  80.34%
@@ -108,35 +102,6 @@ n_estimators=50
 The tuned Random Forest achieved the highest cross-validation accuracy
 among the tuned models in this notebook. Its test accuracy was 80.34%.
 
-These scores are the results saved in the notebook and may differ if the
-dataset or code is changed.
-How to Run the Project
-1. Clone the repository
-git clone YOUR_REPOSITORY_URL
-cd YOUR_REPOSITORY_FOLDER
-2. Install the required libraries
-pip install numpy pandas matplotlib scikit-learn seaborn jupyter
-3. Arrange the project files
-Make sure your project folder contains the notebook and the dataset in
-the expected location:
-project-folder/
-│
-├── Titanic_dataset.ipynb
-├── README.md
-└── data/
-    └── titanic.csv
-4. Open the notebook
-jupyter notebook
-Open Titanic_dataset.ipynb and run the cells in order.
-Notes on Reproducing Predictions
-- The model expects Sex to be numeric: female = 1 and male = 0.
-- The sample prediction function uses the tuned Random Forest model
-  (best_forest).
-- The sample prediction input must follow the feature order: Pclass,
-  Sex, Age, SibSp, PaCh, Fare.
-- The Logistic Regression model uses scaled features. The Decision
-  Tree and Random Forest models in this notebook are trained on the
-  unscaled feature values.
 Project Purpose
 This is an educational machine learning project demonstrating
 exploratory data analysis, categorical encoding, feature scaling,
