@@ -1,75 +1,149 @@
-# Titanic_dataset
-To predict whether a person Died or Survived
 Titanic Survival Prediction
 Project Overview
-This project uses passenger information from the Titanic dataset to
-train and compare machine learning classification models that predict
-whether a passenger survived.
-Objective
-Predict the Survived target from selected passenger characteristics
-and compare model performance before and after hyperparameter tuning.
-Dataset
-The notebook loads a CSV file from data/titanic.csv. It also includes
-an alternative example using Seaborn's built-in Titanic dataset.
+This project uses machine learning to predict whether a passenger
+survived the Titanic disaster based on selected passenger information.
+The work is documented in the Jupyter Notebook Titanic_dataset.ipynb.
 
-The features selected in the notebook are: - Pclass --- passenger
-class - Sex --- encoded as a numeric value - Age - SibSp ---
-siblings/spouses aboard - PaCh --- the column name used in this
-notebook for parent/child count aboard - Fare
+The notebook explores the dataset, prepares the selected features,
+trains classification models, compares their performance, and tunes
+Decision Tree and Random Forest models using GridSearchCV.
+Project Objective
+Build classification models that predict the Survived outcome using
+passenger class, sex, age, family-travel information, and fare.
+Dataset Description
+The notebook reads the dataset from:
+pd.read_csv('data/titanic.csv')
+The dataset inspected in the notebook contains 887 rows and 8
+columns.
+  Column                              Description
+  Survived                          Target variable: 0 = did not
+survive, 1 = survived
 
-The target is Survived: - 0 = did not survive - 1 = survived
+  Pclass                            Passenger ticket class (1, 2, or 3)
 
-Make sure the CSV contains the feature column names expected by the
-notebook. If your dataset uses Parch rather than PaCh, update the
-notebook's feature list and prediction function to use the matching
-column name consistently.
+  Name                              Passenger name
+
+  Sex                               Passenger sex (male or female)
+
+  Age                               Passenger age
+
+  SibSp                             Number of siblings or spouses
+aboard
+
+  PaCh                              Number of parents or children
+aboard, using the column name in
+this dataset
+Fare                              Passenger fare
+Dataset observations
+- Total records: 887
+- Total columns: 8
+- Missing values: None in the inspected dataset
+- Passengers who did not survive (Survived = 0): 545
+- Passengers who survived (Survived = 1): 342
+The notebook uses six features for modelling: Pclass, Sex, Age,
+SibSp, PaCh, and Fare. The Name column is not included in the
+model features.
+Dataset note: The notebook uses the column name PaCh. Keep this
+exact name in your CSV, or update the notebook if your version of the
+dataset uses a different name such as Parch.
+
 Tools and Libraries
 - Python
-- Pandas and NumPy
+- NumPy
+- Pandas
 - Matplotlib
 - Scikit-learn
-- Seaborn (used for the optional built-in dataset example)
-Workflow
-1. Load and inspect the Titanic data.
-2. Explore summary statistics, missing values, and survival counts.
-3. Plot the distribution of the Survived target.
-4. Select passenger features and separate them from the target.
-5. Encode the Sex column numerically.
-6. Split the data into training and testing sets using an 80/20 split
-   and stratification.
-7. Scale features for Logistic Regression.
-8. Train and evaluate Logistic Regression, Decision Tree, and Random
-   Forest classifiers.
-9. Tune Decision Tree and Random Forest hyperparameters with
-   GridSearchCV and five-fold cross-validation.
-10. Evaluate tuned models on the test set.
-11. Use the trained model to try a survival prediction for a passenger
-    example.
-Models
+- Seaborn (used to load an additional built-in Titanic dataset for
+  reference)
+Project Workflow
+1. Import libraries -- Load the Python libraries used for data
+   handling, visualization, model training, and evaluation.
+2. Load the data -- Read data/titanic.csv into a Pandas
+   DataFrame.
+3. Explore the data -- Inspect the dataset structure, descriptive
+   statistics, survival counts, and missing values.
+4. Visualize the target -- Plot the distribution of passengers who
+   survived and those who did not.
+5. Select features and target -- Use Pclass, Sex, Age,
+   SibSp, PaCh, and Fare as input features, with Survived as
+   the target.
+6. Encode the categorical feature -- Convert Sex to numeric
+   values: female = 1 and male = 0.
+7. Split the data -- Use an 80/20 train-test split with
+   random_state=42 and stratification.
+8. Scale features -- Apply StandardScaler to the training and
+   test features for Logistic Regression. The scaler is fitted on the
+   training data and applied to the test data.
+9. Train classification models -- Train Logistic Regression,
+   Decision Tree, and Random Forest classifiers.
+10. Evaluate models -- Compare accuracy and review classification
+    reports.
+11. Tune hyperparameters -- Use five-fold GridSearchCV to tune
+    Decision Tree and Random Forest models.
+12. Make a sample prediction -- Use the tuned Random Forest model to
+    predict survival for a passenger example.
+Machine Learning Models
+The notebook trains and evaluates the following classifiers:
 - Logistic Regression
 - Decision Tree Classifier
 - Random Forest Classifier
-The notebook also imports Support Vector Classifier (SVC), though the
-documented workflow primarily trains the three models listed above.
-Model Evaluation
-The notebook uses: - Accuracy - Classification report (precision,
-recall, and F1-score) - Confusion matrix tools are imported for
-evaluation
+It also imports SVC (Support Vector Classifier), but the notebook does
+not train or evaluate an SVC model in the executed workflow.
+Model Results
+The following results are recorded in the notebook's executed outputs.
+Initial model comparison
+  Model                   Test accuracy
+  Logistic Regression            76.97%
+Decision Tree                  80.34%
+Random Forest                  80.90%
+Hyperparameter tuning
+GridSearchCV uses five-fold cross-validation and accuracy as the scoring
+metric.
+  Model           Best parameters                     Best  Test accuracy after
+cross-validation               tuning
+accuracy 
+  Decision Tree   max_depth=4                     81.81%               80.34%
+Random Forest   max_depth=7,                    83.92%               80.34%
+n_estimators=50
+The tuned Random Forest achieved the highest cross-validation accuracy
+among the tuned models in this notebook. Its test accuracy was 80.34%.
 
-Run the notebook to generate results for your local dataset and
-environment.
-How to Run
-1. Clone or download this repository.
-2. Install the required libraries:
-   pip install pandas numpy matplotlib scikit-learn seaborn jupyter
-3. Place titanic.csv in the data/ folder.
-4. Open and run Titanic_dataset.ipynb in Jupyter Notebook or
-   JupyterLab.
-Project Status
-Educational machine learning project for practicing exploratory data
-analysis, feature preparation, classification, model comparison, and
-hyperparameter tuning.
+These scores are the results saved in the notebook and may differ if the
+dataset or code is changed.
+How to Run the Project
+1. Clone the repository
+git clone YOUR_REPOSITORY_URL
+cd YOUR_REPOSITORY_FOLDER
+2. Install the required libraries
+pip install numpy pandas matplotlib scikit-learn seaborn jupyter
+3. Arrange the project files
+Make sure your project folder contains the notebook and the dataset in
+the expected location:
+project-folder/
+│
+├── Titanic_dataset.ipynb
+├── README.md
+└── data/
+    └── titanic.csv
+4. Open the notebook
+jupyter notebook
+Open Titanic_dataset.ipynb and run the cells in order.
+Notes on Reproducing Predictions
+- The model expects Sex to be numeric: female = 1 and male = 0.
+- The sample prediction function uses the tuned Random Forest model
+  (best_forest).
+- The sample prediction input must follow the feature order: Pclass,
+  Sex, Age, SibSp, PaCh, Fare.
+- The Logistic Regression model uses scaled features. The Decision
+  Tree and Random Forest models in this notebook are trained on the
+  unscaled feature values.
+Project Purpose
+This is an educational machine learning project demonstrating
+exploratory data analysis, categorical encoding, feature scaling,
+train-test splitting, classification, model evaluation, and
+hyperparameter optimization.
 Disclaimer
-This project is for educational purposes. Predictions are estimates from
-a model and do not establish what would have happened to any individual
-passenger.
+This project is for educational purposes only. The predictions are
+generated from patterns learned from the dataset and should not be
+interpreted as definitive historical conclusions about individual
+passengers.
